@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EquippableItemResource" format=3 uid="uid://3h0laxcybo5w"]
+
+[ext_resource type="Script" uid="uid://c18mmg1vcc38t" path="res://Scripts/Resources/Items/EquippableItemResource.cs" id="1_b4qsx"]
+[ext_resource type="Texture2D" uid="uid://dsu4kesmpohb3" path="res://Assets/Weapons/Pistol/Pistol.png" id="1_xi1ua"]
+
+[resource]
+script = ExtResource("1_b4qsx")
+Damage = 1.0
+ReloadSpeed = 3.0
+FireRate = 1.8
+Range = 10.0
+MaxAmmo = 8
+CurrentAmmo = 8
+Type = 1
+Name = "Pistol"
+ItemDescription = "Simple pew pew pistol gun."
+Image = ExtResource("1_xi1ua")
+metadata/_custom_type_script = "uid://c18mmg1vcc38t"

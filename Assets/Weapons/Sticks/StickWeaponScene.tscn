@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://cdfrfcb2vncqp"]
+
+[ext_resource type="Script" uid="uid://c7mrcf66x3gpf" path="res://Assets/Weapons/Sticks/StickWeaponScript.cs" id="1_f3bcx"]
+[ext_resource type="PackedScene" uid="uid://gwg33cblkord" path="res://Assets/Weapons/Sticks/Stick.glb" id="1_fs8ny"]
+[ext_resource type="Resource" uid="uid://brn6of4a7xgf7" path="res://Assets/Weapons/Sticks/StickData.tres" id="2_qhok6"]
+[ext_resource type="PackedScene" uid="uid://w10yjkbvu44k" path="res://Scripts/Components/HitboxComponent/HitboxComponent.tscn" id="2_yv5pd"]
+[ext_resource type="PackedScene" uid="uid://ds2iboeo2bbky" path="res://Scripts/InteractionSystem/InteractionArea.tscn" id="3_7sy3i"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qhok6"]
+size = Vector3(0.21289063, 1.8640137, 0.21875)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_yv5pd"]
+radius = 0.35494074
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7sy3i"]
+size = Vector3(0.21118164, 1.923584, 0.20727539)
+
+[node name="StickWeapon" type="StaticBody3D" unique_id=987222827 node_paths=PackedStringArray("_interactionArea")]
+collision_mask = 2
+script = ExtResource("1_f3bcx")
+_itemData = ExtResource("2_qhok6")
+_interactionArea = NodePath("InteractionArea")
+
+[node name="Stick" parent="." unique_id=369548077 instance=ExtResource("1_fs8ny")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=874292522]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9530029, 0)
+shape = SubResource("BoxShape3D_qhok6")
+
+[node name="HitboxComponent" parent="." unique_id=584544470 instance=ExtResource("2_yv5pd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.552442, 0)
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape3D" parent="HitboxComponent" index="0" unique_id=1123485975]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20250821, 0)
+shape = SubResource("SphereShape3D_yv5pd")
+
+[node name="InteractionArea" parent="." unique_id=331940427 instance=ExtResource("3_7sy3i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9471661, 0)
+collision_layer = 10
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea" unique_id=2014984732]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.046142578, 0)
+shape = SubResource("BoxShape3D_7sy3i")
+
+[editable path="HitboxComponent"]

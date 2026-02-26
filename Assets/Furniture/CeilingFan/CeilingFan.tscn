@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dmx8m3dkmddgs"]
+
+[ext_resource type="PackedScene" uid="uid://bud3qtktcljey" path="res://Assets/Furniture/CeilingFan/CeilingFan.glb" id="1_rwq5i"]
+[ext_resource type="Script" uid="uid://grqulwg06mes" path="res://Assets/Furniture/CeilingFan/CeilingFan.cs" id="2_d7c8a"]
+
+[node name="CeilingFan" unique_id=3596112 instance=ExtResource("1_rwq5i")]
+script = ExtResource("2_d7c8a")
+
+[node name="Fan" parent="." index="1" unique_id=1494298804]
+transform = Transform3D(0.15985543, 0, -0.085717335, 0, 0.068417706, 0, 0.085717335, 0, 0.15985543, 0, 0.767292, 0)

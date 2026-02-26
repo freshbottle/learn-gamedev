@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ctdkpftfsybsc"]
+
+[ext_resource type="Script" uid="uid://b5rt2ukbeda8j" path="res://Scripts/SignalManager/SignalManager.cs" id="1_votcd"]
+
+[node name="SignalManager" type="Node" unique_id=682738350]
+script = ExtResource("1_votcd")

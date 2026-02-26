@@ -1,0 +1,338 @@
+[gd_scene format=3 uid="uid://c6todnsymjhba"]
+
+[ext_resource type="Script" uid="uid://dw57smqu6n4fx" path="res://Entities/Player/PlayerScript.cs" id="1_e5kic"]
+[ext_resource type="Script" uid="uid://dr11517dtdrrk" path="res://Entities/Player/InteractionCastScript.cs" id="2_gau2p"]
+[ext_resource type="PackedScene" uid="uid://dxccdt7v2456j" path="res://Scripts/Components/HealthComponent/HealthComponent.tscn" id="2_ww0jn"]
+[ext_resource type="PackedScene" uid="uid://6axwwl6gv1p3" path="res://Scripts/Components/HurtboxComponent/HurtboxComponent.tscn" id="3_1des2"]
+[ext_resource type="Script" uid="uid://d4kcrcmgmq42h" path="res://Entities/Player/Hitscan.cs" id="3_itfmo"]
+[ext_resource type="Script" uid="uid://dws5vuyjhgm3e" path="res://Entities/Player/WeaponHolder.cs" id="4_eg3fj"]
+[ext_resource type="Script" uid="uid://cya5s7njxr7jm" path="res://Scripts/StateMachine/StateMachine.cs" id="5_an6q6"]
+[ext_resource type="Script" uid="uid://btco14nxecrrd" path="res://Entities/Player/States/Idle.cs" id="7_wnp7d"]
+[ext_resource type="Script" uid="uid://b6cqqvdyybi3y" path="res://Entities/Player/States/Running.cs" id="9_6tuk6"]
+[ext_resource type="Script" uid="uid://x5q8mgn6br84" path="res://Entities/Player/States/Walking.cs" id="10_eg3fj"]
+[ext_resource type="Script" uid="uid://b5hjgaayicwuu" path="res://Entities/Player/HUD/PlayerHud.cs" id="10_hasnx"]
+[ext_resource type="Script" uid="uid://hwu0gpcwf3fw" path="res://Entities/Player/HUD/Hotbar.cs" id="10_lcetx"]
+[ext_resource type="PackedScene" uid="uid://bak1gujwql0x1" path="res://Entities/Player/HUD/Slot.tscn" id="12_ifom3"]
+[ext_resource type="Script" uid="uid://yjxrke6o4r5n" path="res://Entities/Player/HUD/WeaponSlot.cs" id="15_efdq2"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u36tg"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1des2"]
+
+[sub_resource type="Animation" id="Animation_f14hy"]
+resource_name = "Idle"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/WeaponHolder:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.02, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -3.1415925, 0), Vector3(0.17453292, -3.1415927, 0), Vector3(0, -3.1415925, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wnp7d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/WeaponHolder:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -3.1415925, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/WeaponHolder:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.5419438, -0.4320593, -0.6595749)]
+}
+
+[sub_resource type="Animation" id="Animation_ifom3"]
+resource_name = "Running"
+length = 0.67643553
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/WeaponHolder:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.06666667, 0.3233254),
+"transitions": PackedFloat32Array(1.866068, 1.5691705),
+"update": 0,
+"values": [Vector3(0.5419438, -0.4320593, -0.6595749), Vector3(0.382, -0.432, -0.66)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/WeaponHolder:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.87266463, -3.1415927, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wnp7d"]
+_data = {
+&"Idle": SubResource("Animation_f14hy"),
+&"RESET": SubResource("Animation_wnp7d"),
+&"Running": SubResource("Animation_ifom3")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_1des2"]
+font_size = 24
+font_color = Color(0.92535293, 0.9253528, 0.9253529, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lcetx"]
+bg_color = Color(0.6068905, 0.98687786, 0.214905, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hasnx"]
+bg_color = Color(0.31146926, 0.5925383, 0.07864005, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="Player" type="CharacterBody3D" unique_id=1093121812 node_paths=PackedStringArray("_healthComponent", "_hurtboxComponent")]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_e5kic")
+_healthComponent = NodePath("Components/HealthComponent")
+_hurtboxComponent = NodePath("Components/HurtboxComponent")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1557225357]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_u36tg")
+
+[node name="Head" type="Camera3D" parent="." unique_id=1709102749]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5045267, 0)
+fov = 90.0
+
+[node name="InteractionCast" type="RayCast3D" parent="Head" unique_id=1249273872]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.41019553)
+target_position = Vector3(0, 0, -1.4)
+collision_mask = 8
+hit_from_inside = true
+hit_back_faces = false
+collide_with_areas = true
+script = ExtResource("2_gau2p")
+
+[node name="Hitscan" type="RayCast3D" parent="Head" unique_id=2012121840 node_paths=PackedStringArray("_player", "_weaponHolder")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4112889)
+target_position = Vector3(0, 0, -15)
+collision_mask = 29
+collide_with_areas = true
+script = ExtResource("3_itfmo")
+_player = NodePath("../..")
+_weaponHolder = NodePath("../WeaponHolder")
+
+[node name="Cooldown" type="Timer" parent="Head/Hitscan" unique_id=1763457646]
+
+[node name="Reload" type="Timer" parent="Head/Hitscan" unique_id=671516000]
+
+[node name="WeaponHolder" type="Node3D" parent="Head" unique_id=1299857512 node_paths=PackedStringArray("Player")]
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0.5419438, -0.4320593, -0.6595749)
+script = ExtResource("4_eg3fj")
+Player = NodePath("../..")
+
+[node name="Components" type="Node3D" parent="." unique_id=418128401]
+
+[node name="HealthComponent" parent="Components" unique_id=334333592 instance=ExtResource("2_ww0jn")]
+Health = 10.0
+
+[node name="HurtboxComponent" parent="Components" unique_id=730448499 node_paths=PackedStringArray("HealthComponent") instance=ExtResource("3_1des2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 2
+collision_mask = 0
+HealthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape3D" parent="Components/HurtboxComponent" index="0" unique_id=563348473]
+shape = SubResource("CapsuleShape3D_1des2")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1573063424 node_paths=PackedStringArray("InitialState")]
+script = ExtResource("5_an6q6")
+InitialState = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1103307427]
+script = ExtResource("7_wnp7d")
+
+[node name="Invincible" type="Node" parent="StateMachine" unique_id=871219695]
+
+[node name="Running" type="Node" parent="StateMachine" unique_id=1648513370]
+script = ExtResource("9_6tuk6")
+
+[node name="Walking" type="Node" parent="StateMachine" unique_id=1415300932]
+script = ExtResource("10_eg3fj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=898755546]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_wnp7d")
+
+[node name="HotbarLogic" type="Node3D" parent="." unique_id=11293213]
+
+[node name="PlayerHUD" type="CanvasLayer" parent="." unique_id=1085853184]
+script = ExtResource("10_hasnx")
+
+[node name="InteractLabel" type="Label" parent="PlayerHUD" unique_id=656375251]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -380.0
+offset_top = -85.0
+offset_bottom = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "PRESS [E] TO INTERACT"
+label_settings = SubResource("LabelSettings_1des2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Crosshair" type="ColorRect" parent="PlayerHUD" unique_id=621411870]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -4.0
+offset_right = 5.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HealthBar" type="ProgressBar" parent="PlayerHUD" unique_id=572642413]
+offset_left = 30.0
+offset_top = 19.0
+offset_right = 360.0
+offset_bottom = 46.0
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_lcetx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hasnx")
+value = 100.0
+show_percentage = false
+
+[node name="Hotbar" type="Control" parent="PlayerHUD" unique_id=1657599968]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -72.0
+offset_right = 250.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("10_lcetx")
+
+[node name="MarginContainer" type="MarginContainer" parent="PlayerHUD/Hotbar" unique_id=1315756252]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerHUD/Hotbar/MarginContainer" unique_id=977270690]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Slot" parent="PlayerHUD/Hotbar/MarginContainer/HBoxContainer" unique_id=56540603 instance=ExtResource("12_ifom3")]
+layout_mode = 2
+
+[node name="Slot2" parent="PlayerHUD/Hotbar/MarginContainer/HBoxContainer" unique_id=804045566 instance=ExtResource("12_ifom3")]
+layout_mode = 2
+
+[node name="Slot3" parent="PlayerHUD/Hotbar/MarginContainer/HBoxContainer" unique_id=1701167297 instance=ExtResource("12_ifom3")]
+layout_mode = 2
+
+[node name="Slot4" parent="PlayerHUD/Hotbar/MarginContainer/HBoxContainer" unique_id=565121165 instance=ExtResource("12_ifom3")]
+layout_mode = 2
+
+[node name="WeaponBar" type="Control" parent="PlayerHUD" unique_id=1314042716]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 36.0
+offset_top = -96.0
+offset_right = 222.0
+offset_bottom = -26.0
+grow_vertical = 0
+
+[node name="WeaponSlot" type="Panel" parent="PlayerHUD/WeaponBar" unique_id=1273657704]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("15_efdq2")
+
+[node name="WeaponIcon" type="TextureRect" parent="PlayerHUD/WeaponBar/WeaponSlot" unique_id=274876319]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -61.0
+offset_top = -29.0
+offset_right = 61.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AmmoLabel" type="Label" parent="PlayerHUD/WeaponBar/WeaponSlot" unique_id=1607252277]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -62.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[editable path="Components/HurtboxComponent"]

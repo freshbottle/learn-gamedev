@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EquippableItemResource" format=3 uid="uid://brn6of4a7xgf7"]
+
+[ext_resource type="Script" uid="uid://c18mmg1vcc38t" path="res://Scripts/Resources/Items/EquippableItemResource.cs" id="1_rdlox"]
+
+[resource]
+script = ExtResource("1_rdlox")
+type = 6
+Type = 1
+Name = "Stick"
+ItemDescription = "A stick with good reach."
+metadata/_custom_type_script = "uid://c18mmg1vcc38t"

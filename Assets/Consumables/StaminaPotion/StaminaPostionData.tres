@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ConsumableItemResource" format=3 uid="uid://brxe08wpqhpt7"]
+
+[ext_resource type="Script" uid="uid://bdmnxguepdo0q" path="res://Scripts/Resources/Items/ConsumableItemResource.cs" id="1_7tph5"]
+
+[resource]
+script = ExtResource("1_7tph5")
+type = 1
+Type = 2
+Name = "Stamina Potion"
+ItemDescription = "Why jog when drink potion?"
+metadata/_custom_type_script = "uid://bdmnxguepdo0q"

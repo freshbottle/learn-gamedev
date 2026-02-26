@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://cf8gt5vussuv2"]
+
+[ext_resource type="PackedScene" uid="uid://dxccdt7v2456j" path="res://Scripts/Components/HealthComponent/HealthComponent.tscn" id="1_mtkip"]
+[ext_resource type="PackedScene" uid="uid://6axwwl6gv1p3" path="res://Scripts/Components/HurtboxComponent/HurtboxComponent.tscn" id="2_kt2ek"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_mtkip"]
+bounce = 0.6
+
+[sub_resource type="BoxMesh" id="BoxMesh_cs3pk"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mtkip"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kt2ek"]
+size = Vector3(2.9951172, 2.3239746, 2.508789)
+
+[node name="BaseEnemy" type="RigidBody3D" unique_id=1599563303]
+disable_mode = 1
+collision_layer = 4
+collision_mask = 7
+physics_material_override = SubResource("PhysicsMaterial_mtkip")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=658156183]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_cs3pk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=579780415]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.99957275, 0)
+shape = SubResource("BoxShape3D_mtkip")
+
+[node name="HealthComponent" parent="." unique_id=367456025 instance=ExtResource("1_mtkip")]
+Health = 3.0
+
+[node name="HurtboxComponent" parent="." unique_id=730448499 node_paths=PackedStringArray("HealthComponent") instance=ExtResource("2_kt2ek")]
+collision_layer = 4
+collision_mask = 0
+HealthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="HurtboxComponent" unique_id=1794583245]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_kt2ek")

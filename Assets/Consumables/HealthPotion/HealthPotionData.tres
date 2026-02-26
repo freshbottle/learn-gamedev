@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ConsumableItemResource" format=3 uid="uid://fq5muqoh1xtw"]
+
+[ext_resource type="Texture2D" uid="uid://eu3l168wgi0c" path="res://Assets/Consumables/HealthPotion/HealthPotion.png" id="1_l3ja6"]
+[ext_resource type="Script" uid="uid://bdmnxguepdo0q" path="res://Scripts/Resources/Items/ConsumableItemResource.cs" id="1_tfocm"]
+
+[resource]
+script = ExtResource("1_tfocm")
+Boost = 10.0
+Type = 2
+Name = "Health Potion"
+ItemDescription = "Give more life to the player."
+Image = ExtResource("1_l3ja6")
+metadata/_custom_type_script = "uid://bdmnxguepdo0q"

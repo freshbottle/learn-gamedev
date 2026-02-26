@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://bjvpjopivmlpl"]
+
+[ext_resource type="PackedScene" uid="uid://c6todnsymjhba" path="res://Entities/Player/PlayerScene.tscn" id="1_r150o"]
+[ext_resource type="PackedScene" uid="uid://3fo2m488ajh4" path="res://Assets/Furniture/Desk.tscn" id="1_rgh2o"]
+[ext_resource type="PackedScene" uid="uid://c3sjb1m7flbuh" path="res://Assets/Furniture/Stool.glb" id="2_kln2b"]
+[ext_resource type="PackedScene" uid="uid://dmx8m3dkmddgs" path="res://Assets/Furniture/CeilingFan/CeilingFan.tscn" id="3_v1gob"]
+[ext_resource type="PackedScene" uid="uid://csaxlkbq0dc0y" path="res://Assets/Weapons/Pistol/Pistol.tscn" id="4_rgh2o"]
+[ext_resource type="PackedScene" uid="uid://bpj7rrgtrh6c" path="res://Assets/Consumables/HealthPotion/HealthPotionScene.tscn" id="5_pbw6q"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c1w88"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_r150o"]
+sky_material = SubResource("ProceduralSkyMaterial_c1w88")
+
+[sub_resource type="Environment" id="Environment_idj7w"]
+background_mode = 1
+sky = SubResource("Sky_r150o")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Main" type="Node3D" unique_id=1413173446]
+
+[node name="Environment" type="Node3D" parent="." unique_id=77003670]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment" unique_id=1469850082]
+environment = SubResource("Environment_idj7w")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment" unique_id=1443887907]
+transform = Transform3D(-0.9998214, 0.016368492, -0.009450319, -0.006348328, 0.18012464, 0.98362327, 0.017802687, 0.9835075, -0.17998856, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Room" type="Node3D" parent="." unique_id=1329641034]
+
+[node name="Floor" type="CSGBox3D" parent="Room" unique_id=1084647358]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.017739296, -0.088639855, 0.008365631)
+use_collision = true
+collision_mask = 6
+size = Vector3(10.541016, 1, 10.683594)
+
+[node name="LeftWall" type="CSGBox3D" parent="Room" unique_id=1972294458]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.984048, 2.1426625, 0.008365631)
+use_collision = true
+collision_mask = 6
+size = Vector3(0.60839844, 3.9575195, 10.683594)
+
+[node name="RightWall" type="CSGBox3D" parent="Room" unique_id=246948492]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.015952, 2.1426625, 0.008365631)
+use_collision = true
+collision_mask = 6
+size = Vector3(0.60839844, 3.9575195, 10.683594)
+
+[node name="BackWall" type="CSGBox3D" parent="Room" unique_id=231171987]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.009560108, 2.1426625, 5.088871)
+use_collision = true
+collision_mask = 6
+size = Vector3(9.687012, 3.9575195, 0.522583)
+
+[node name="FrontWall" type="CSGBox3D" parent="Room" unique_id=1693867704]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.009560108, 2.1426625, -5.06735)
+use_collision = true
+collision_mask = 6
+size = Vector3(9.687012, 3.9575195, 0.522583)
+
+[node name="Door" type="CSGCylinder3D" parent="Room/FrontWall" unique_id=1594550810]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.009560108, -0.6513784, 0.14397287)
+use_collision = true
+radius = 1.6611328
+
+[node name="Desk" parent="Room" unique_id=794263328 instance=ExtResource("1_rgh2o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.36426508, 2.41074)
+
+[node name="Stool" parent="Room" unique_id=248980548 instance=ExtResource("2_kln2b")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0.3744439, 3.5686355)
+
+[node name="CeilingFan" parent="Room" unique_id=3596112 instance=ExtResource("3_v1gob")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9535346, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Room/CeilingFan" unique_id=1725282253]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1342864, 0)
+
+[node name="Player" parent="." unique_id=1093121812 instance=ExtResource("1_r150o")]
+transform = Transform3D(-0.9934767, 0, -0.11403558, 0, 1, 0, 0.11403558, 0, -0.9934767, -0.04442644, 0.4136994, -2.1701589)
+_mouseSensitivity = 0.001
+
+[node name="Pistol" parent="." unique_id=1400232316 instance=ExtResource("4_rgh2o")]
+transform = Transform3D(2.8703145e-08, 0.6566515, 0.7541941, 1, -4.3711385e-08, -1.2980344e-15, 3.296686e-08, 0.7541941, -0.6566515, 0.4711724, 1.2891592, 2.2591412)
+
+[node name="HealthPotion" parent="." unique_id=1068455707 instance=ExtResource("5_pbw6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1418767, 1.1829227, 2.3555357)
+
+[node name="HealthPotion2" parent="." unique_id=702725797 instance=ExtResource("5_pbw6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7696645, 1.2033434, 2.6084948)
+
+[node name="HealthPotion3" parent="." unique_id=63459895 instance=ExtResource("5_pbw6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7696645, 1.2033434, 2.0809534)

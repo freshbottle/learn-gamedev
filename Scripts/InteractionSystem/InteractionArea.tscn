@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://ds2iboeo2bbky"]
+
+[ext_resource type="Script" uid="uid://c32os32pfq18a" path="res://Scripts/InteractionSystem/InteractionArea.cs" id="1_oem7a"]
+
+[node name="InteractionArea" type="Area3D" unique_id=331940427]
+collision_layer = 8
+collision_mask = 10
+script = ExtResource("1_oem7a")

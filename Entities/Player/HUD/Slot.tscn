@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://bak1gujwql0x1"]
+
+[ext_resource type="Script" uid="uid://dply4nlqvqbqd" path="res://Entities/Player/HUD/Slot.cs" id="1_ii0jk"]
+
+[node name="Slot" type="Panel" unique_id=56540603]
+custom_minimum_size = Vector2(64, 64)
+anchors_preset = -1
+anchor_right = 0.056
+anchor_bottom = 0.09900001
+offset_right = -64.512
+offset_bottom = -64.15201
+script = ExtResource("1_ii0jk")
+_slotNumber = 1
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=541490110]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="SlotLabel" type="Label" parent="." unique_id=562955044]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -10.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "1"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="AmountLabel" type="Label" parent="." unique_id=1346297011]
+layout_mode = 1
+offset_right = 39.0
+offset_bottom = 23.0

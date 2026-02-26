@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://bpj7rrgtrh6c"]
+
+[ext_resource type="Script" uid="uid://cf86karmhk4kf" path="res://Assets/Consumables/HealthPotion/HealthPotionScript.cs" id="1_1p0jq"]
+[ext_resource type="PackedScene" uid="uid://b3xamci4ug5ym" path="res://Assets/Consumables/HealthPotion/HealthPotion.glb" id="1_72rh4"]
+[ext_resource type="Resource" uid="uid://fq5muqoh1xtw" path="res://Assets/Consumables/HealthPotion/HealthPotionData.tres" id="2_eou5w"]
+[ext_resource type="PackedScene" uid="uid://ds2iboeo2bbky" path="res://Scripts/InteractionSystem/InteractionArea.tscn" id="2_qahyf"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1p0jq"]
+bounce = 0.2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_72rh4"]
+radius = 0.11685362
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qahyf"]
+radius = 0.15004839
+
+[node name="HealthPotion" type="RigidBody3D" unique_id=1068455707 node_paths=PackedStringArray("interactionArea")]
+collision_layer = 0
+collision_mask = 3
+mass = 10.0
+physics_material_override = SubResource("PhysicsMaterial_1p0jq")
+script = ExtResource("1_1p0jq")
+interactionArea = NodePath("InteractionArea")
+_itemData = ExtResource("2_eou5w")
+
+[node name="HealthPotion" parent="." unique_id=355027503 instance=ExtResource("1_72rh4")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=642072261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1389958, 0)
+shape = SubResource("SphereShape3D_72rh4")
+
+[node name="InteractionArea" parent="." unique_id=331940427 instance=ExtResource("2_qahyf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17398581, 0)
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea" unique_id=898481940]
+shape = SubResource("SphereShape3D_qahyf")

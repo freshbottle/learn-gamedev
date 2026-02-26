@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://w10yjkbvu44k"]
+
+[ext_resource type="Script" uid="uid://yrx618unpcj7" path="res://Scripts/Components/HitboxComponent/HitboxComponent.cs" id="1_pqccu"]
+
+[node name="HitboxComponent" type="Area3D" unique_id=584544470]
+collision_layer = 16
+collision_mask = 8
+script = ExtResource("1_pqccu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1123485975]

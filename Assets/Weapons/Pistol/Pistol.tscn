@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://csaxlkbq0dc0y"]
+
+[ext_resource type="PackedScene" uid="uid://cslgu10vpmmfy" path="res://Assets/Weapons/Pistol/Pistol.glb" id="1_m4al4"]
+[ext_resource type="Script" uid="uid://b7dcuuwcoe72e" path="res://Assets/Weapons/Pistol/Pistol.cs" id="2_o0dr7"]
+[ext_resource type="Resource" uid="uid://3h0laxcybo5w" path="res://Assets/Weapons/Pistol/PistolData.tres" id="3_lpkq2"]
+[ext_resource type="PackedScene" uid="uid://ds2iboeo2bbky" path="res://Scripts/InteractionSystem/InteractionArea.tscn" id="3_va0cx"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_va0cx"]
+radius = 0.22537754
+
+[node name="Pistol" unique_id=1400232316 node_paths=PackedStringArray("_area") instance=ExtResource("1_m4al4")]
+script = ExtResource("2_o0dr7")
+WeaponData = ExtResource("3_lpkq2")
+_area = NodePath("InteractionArea")
+
+[node name="InteractionArea" parent="." index="3" unique_id=331940427 instance=ExtResource("3_va0cx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18061164, 0.20093046)
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea" index="0" unique_id=1543138198]
+shape = SubResource("SphereShape3D_va0cx")
