@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://dhf0eur8xa8wi"]
+
+[ext_resource type="Script" uid="uid://sd28o60sdlod" path="res://Assets/Furniture/Door/Door.cs" id="1_1ep06"]
+[ext_resource type="PackedScene" uid="uid://ds2iboeo2bbky" path="res://Scripts/InteractionSystem/InteractionArea.tscn" id="1_a4gpc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_fw02g"]
+size = Vector3(1, 2, 0.15)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fw02g"]
+size = Vector3(1, 2.0063477, 0.171875)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ik0op"]
+size = Vector3(1, 2.033081, 0.12597656)
+
+[node name="Door" type="StaticBody3D" unique_id=1929548509]
+script = ExtResource("1_1ep06")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1205712224]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.004812479, 1.0000954, 0)
+mesh = SubResource("BoxMesh_fw02g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1538008855]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.987494, 0)
+shape = SubResource("BoxShape3D_fw02g")
+
+[node name="InteractionArea" parent="." unique_id=331940427 instance=ExtResource("1_a4gpc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48473227, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea" unique_id=1334223324]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5165405, 0)
+shape = SubResource("BoxShape3D_ik0op")

@@ -8,12 +8,21 @@ using System;
 namespace Entities.Player;
 public partial class Hitscan : RayCast3D
 {   
+    /* 
+        This script controls all the logic behind gun gameplay:
+            - Which gun is currently active
+            - Set all the properites of the current gun
+            - Animation for shooting
+    */
+
     [Export]
     private PlayerScript _player;
 
+    // If this is null, nothing in will run.
     [Export]
     private WeaponHolder _weaponHolder;
 
+    // Stores the data of the weapon in a global scope to access it everywhere.
     [Export]
     private EquippableItemResource _weaponData;
 
@@ -23,18 +32,18 @@ public partial class Hitscan : RayCast3D
 
     public override void _Ready()
     {
+        // --- Weapon's cooldown ---
         _cooldown = GetNode<Timer>("Cooldown");
         if (_cooldown == null) GD.PushError("Missing cooldown timer. Add one.");
-
-        _reload = GetNode<Timer>("Reload");
-        if (_reload == null) GD.PushError("Missing reload timer. Add one.");
-
         _cooldown.Timeout += () => 
         {
             _readyToFire = true;
             GD.Print($"Ready to fire? {_readyToFire}");
         };
 
+        // --- Reload ---
+        _reload = GetNode<Timer>("Reload");
+        if (_reload == null) GD.PushError("Missing reload timer. Add one.");
         _reload.Timeout += () =>
         {
             _readyToFire = true;
@@ -43,6 +52,8 @@ public partial class Hitscan : RayCast3D
             SignalManager.Instance.EmitSignal(nameof(SignalManager.WeaponDataUpdated), weapon);
         };
 
+
+        // Only runs when a new weapon is added to the player.
         SignalManager.Instance.SetWeapon += () =>
         {
             // --- Set weapon properties to the timer

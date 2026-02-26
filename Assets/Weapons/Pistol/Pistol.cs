@@ -27,6 +27,7 @@ public partial class Pistol : Node3D
             InventorySystem.Instance.PrintWeapons();
             var pistolScene = GD.Load<PackedScene>("res://Assets/Weapons/Pistol/Pistol.tscn");
             SignalManager.Instance.EmitSignal(nameof(SignalManager.EquippedWeapon), pistolScene);
+            SignalManager.Instance.EmitSignal(nameof(SignalManager.IntroDoorOpened));
             QueueFree();
         };
     }

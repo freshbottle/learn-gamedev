@@ -16,7 +16,7 @@ public partial class InventorySystem : Node
     // I want to have three inventory categories:
     // 1. Holds all items that are craftable
     // 2. Holds all consumable items -> Potions, buffs etc.
-    // 3. Holds all weapons (which are unique and do not stacks)
+    // 3. Holds all weapons (which are unique and do not stack)
 
     [Export]    
     public Array<ItemStack> Items = [];
